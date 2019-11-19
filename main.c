@@ -10,7 +10,7 @@
 int main(int argc, char* argv[]){
     char dir [50];
     if (argc <= 1){
-        printf("Showing current directory, if you want a different directory enter its name after program\n\n" );
+        printf("Showing current directory, if you want a different directory add DIR=<directory> after make run\n\n" );
         strcpy(dir,".");
     } else {
         strcpy(dir,argv[1]);
@@ -31,5 +31,5 @@ int main(int argc, char* argv[]){
             printf("Regular File: %s\n", directory->d_name);
         }
     }
-    printf("Total size is %ld\n", totalSize);
+    printf("Total size is %d\n", totalSize);
 }
