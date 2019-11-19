@@ -23,7 +23,6 @@ int main(int argc, char* argv[]){
     int totalSize = 0;
     for (; directory != NULL; directory = readdir(d)){
         stat(directory->d_name, file);
-        printf("%s %d  %d\n", directory->d_name, file->st_size, totalSize);
         totalSize += file->st_size;
         if (directory->d_type == DT_DIR){
             printf("Directory: %s\n", directory->d_name);
@@ -32,5 +31,5 @@ int main(int argc, char* argv[]){
             printf("Regular File: %s\n", directory->d_name);
         }
     }
-    printf("%ld\n", totalSize);
+    printf("Total size is %ld\n", totalSize);
 }
