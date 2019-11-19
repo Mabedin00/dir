@@ -7,19 +7,30 @@
 # include <errno.h>
 # include <unistd.h>
 
-
-int main(){
-    DIR * d = opendir(".");
+int main(int argc, char* argv[]){
+    char dir [50];
+    if (argc <= 1){
+        printf("Showing current directory, if you want a different directory enter its name after program\n\n" );
+        strcpy(dir,".");
+    } else {
+        strcpy(dir,argv[1]);
+    }
+    printf("Statistics for directory: %s\n", dir);
+    DIR * d = opendir(dir);
     int i;
     struct dirent * directory;
-    struct stat file;
+    struct stat *file= malloc(sizeof(struct stat));
+    int totalSize = 0;
     for (; directory != NULL; directory = readdir(d)){
-        stat(directory->d_name, &file);
-        printf("%s has a size of %d", directory->d_name, file.st_size);
+        stat(directory->d_name, file);
+        printf("%s %d  %d\n", directory->d_name, file->st_size, totalSize);
+        totalSize += file->st_size;
         if (directory->d_type == DT_DIR){
-            printf(" and is a directory");
+            printf("Directory: %s\n", directory->d_name);
         }
-        printf("\n");
+        if (directory->d_type == DT_REG){
+            printf("Regular File: %s\n", directory->d_name);
+        }
     }
-
+    printf("%ld\n", totalSize);
 }
