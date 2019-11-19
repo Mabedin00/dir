@@ -1,7 +1,7 @@
-all: directories.o
-	gcc -o program directories.c
-directories.o: directories.c
-	gcc -c -g directories.c
+all: main.o
+	gcc -o program main.c
+main.o: main.c
+	gcc -c -g main.c
 run:
 	./program
 clean:
